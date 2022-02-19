@@ -18,6 +18,12 @@ session.headers.update(headers)
 try:
     response = session.get(url)
     data = json.loads(response.text)
-    print(data)
+
+    #write output into cryptomap.json file
+    with open("cryptomap.txt", "w") as external_file:
+        #print(data, file=external_file)
+        external_file.write(json.dumps(data, indent=4, sort_keys=True))
+        external_file.close()
+    
 except (ConnectionError, Timeout, TooManyRedirects) as e:
     print(e)

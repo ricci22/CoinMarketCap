@@ -1,0 +1,2 @@
+Hello
+This text will be added to the file
