@@ -7,6 +7,7 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
+from google.oauth2 import service_account 
 
 # if modifying these scopes delete the file token.json
 SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
@@ -28,8 +29,10 @@ def main():
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
-            creds = flow.run_local_server(port=0)
+            # flow = InstalledAppFlow.from_client_secrets_file('helloworld-326911-88f09c03d285.json', SCOPES)
+            # creds = flow.run_local_server(port=0)            
+
+            creds = service_account.Credentials.from_service_account_file('helloworld-326911-88f09c03d285.json', scopes = SCOPES)
 
         # save the credentials for the next run
         with open('token.json', 'w') as token:
